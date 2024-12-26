@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost'; // или IP-адрес вашего сервера
 $db = 'tea_shop'; // имя вашей базы данных
-$user = 'your_username'; // ваше имя пользователя MySQL
-$pass = 'your_password'; // ваш пароль MySQL
+$user = 'root'; // ваше имя пользователя MySQL
+$pass = '1111'; // ваш пароль MySQL
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);

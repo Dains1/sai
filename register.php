@@ -6,10 +6,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Хешируем пароль
 
+     // Проверка на совпадение паролей
+     if ($_POST['password'] !== $_POST['confirm-password']) {
+        echo "Пароли не совпадают.";
+        exit;
+    }
+
     // Подготовленный запрос для предотвращения SQL-инъекций
     $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
     $stmt->execute([$username, $email, $password]);
 
-    echo "Регистрация успешна!";
+    
+    // Перенаправление на главную страницу после успешной регистрации
+    header("Location: index copy.html");
+    exit();
 }
-?>

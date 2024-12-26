@@ -11,8 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
+        // Успешная авторизация
         echo "Вход успешен!";
-        // Здесь можно установить сессию или выполнить другие действия
+        
+        // Перенаправление на главную страницу после успешной авторизации
+        header("Location: index copy.html");
+        exit();
     } else {
         echo "Неверное имя пользователя или пароль.";
     }
