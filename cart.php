@@ -13,17 +13,17 @@ if (isset($_GET['product_id'])) {
     if ($product) {
         // Добавляем товар в сессию корзины
         if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
+            $_SESSION['cart'] = []; // Инициализируем корзину, если она еще не существует
         }
 
         if (isset($_SESSION['cart'][$product_id])) {
-            $_SESSION['cart'][$product_id]['quantity']++;
+            $_SESSION['cart'][$product_id]['quantity']++; // Увеличиваем количество, если товар уже в корзине
         } else {
+            // Добавляем новый товар в корзину
             $_SESSION['cart'][$product_id] = [
                 'name' => $product['name'],
                 'price' => $product['price'],
-                'quantity' =>
-                'quantity' => 1
+                'quantity' => 1 // Устанавливаем количество в 1
             ];
         }
     }

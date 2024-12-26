@@ -3,7 +3,7 @@ require_once 'db.php';  // Подключаем базу данных
 
 // Получаем список товаров из базы данных
 $sql = "SELECT * FROM products";
-$result = $conn->query($sql);
+$result = $pdo->query($sql); // Используем $pdo для выполнения запроса
 ?>
 
 <!DOCTYPE html>
@@ -21,18 +21,17 @@ $result = $conn->query($sql);
             <a href="index.html">Главная</a>
             <a href="cart.html">Корзина</a>
             <a href="products.php">Товары</a>
-            <a href="registration.html" class="button">Зарегистрируйтесь</a>
-            <a href="authorization.html" class="button">Авторизация</a>
+            <a href="index.html" class="button">Выход</a>
         </nav>
     </header>
     <main>
         <h1>Товары</h1>
         <section class="products">
-            <?php while($product = $result->fetch_assoc()): ?>
+            <?php while($product = $result->fetch(PDO::FETCH_ASSOC)): ?>
             <div class="product">
-                <img src="https://via.placeholder.com/300x400" alt="<?= $product['name'] ?>">
-                <h3><?= $product['name'] ?></h3>
-                <p>Цена: <?= $product['price'] ?> рублей</p>
+                <img src="https://via.placeholder.com/300x400" alt="<?= htmlspecialchars($product['name']) ?>">
+                <h3><?= htmlspecialchars($product['name']) ?></h3>
+                <p>Цена: <?= htmlspecialchars($product['price']) ?> рублей</p>
                 <button onclick="addToCart(<?= $product['id'] ?>)">Добавить в корзину</button>
             </div>
             <?php endwhile; ?>
